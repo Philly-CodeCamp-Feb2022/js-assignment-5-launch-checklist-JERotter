@@ -1,7 +1,6 @@
 // Write your JavaScript code here!
 
 window.addEventListener("load", () => {
-    // let formVar = document.querySelector("form");
     let listVar = document.querySelector("ol");
     let pilotVar = document.querySelector("input[name=pilotName]");
     let copilotVar = document.querySelector("input[name=copilotName]");
@@ -9,16 +8,9 @@ window.addEventListener("load", () => {
     let cargoVar = document.querySelector("input[name=cargoMass]");
     let formVar = document.getElementById("launchForm");
     
-    // setTimeout ( () => { 
-    //     formVar.addEventListener("submit", event => 
-    //     formSubmission(event, document, listVar, pilotVar, copilotVar, fuelVar, cargoVar), 5000)
-    // })
 
     formVar.addEventListener("submit", (event) => formSubmission(event, document, listVar, pilotVar, copilotVar, fuelVar, cargoVar));
-    //  document.querySelector("form").submit();  // or maybe in scriptHelper?
-     //also maybe reset()??
-    //  setTimeout(document.querySelector("form").submit(), 5000);
-
+    
    let listedPlanets;
    // Set listedPlanetsResponse equal to the value returned by calling myFetch()
    let listedPlanetsResponse = myFetch();

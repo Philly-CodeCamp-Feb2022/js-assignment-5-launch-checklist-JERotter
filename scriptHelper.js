@@ -52,7 +52,10 @@ function formSubmission(event, document, list, pilot, copilot, fuelLevel, cargoL
         cVar.innerText = `Cargo mass low enough for launch.`
         statVar1.style.color = "green";
         statVar1.innerText = "Shuttle ready for launch"; 
-        event.preventDefault();
+        event.preventDefault(); //3 sec. pause to display update
+         setTimeout(function(){
+            document.querySelector("form").submit();
+         }, 3000); //submit
     }
 
     
@@ -103,6 +106,10 @@ function formSubmission(event, document, list, pilot, copilot, fuelLevel, cargoL
         hVar2.style.color = "red";
         hVar2.innerText = "Shuttle not ready for launch"; 
         event.preventDefault();
+    }else if (fuelLevel.value > 10000) {
+        fVar = document.getElementById('fuelStatus');
+        fVar.innerText = `There is enough fuel for the journey.`
+        event.preventDefault();
     }//fuel
 
 
@@ -111,8 +118,6 @@ function formSubmission(event, document, list, pilot, copilot, fuelLevel, cargoL
         alert("All fields are required!");
         event.preventDefault();
     }
-
-    // setTimeout(document.querySelector("form").submit(), 10000);
 }
 
 async function myFetch() {
