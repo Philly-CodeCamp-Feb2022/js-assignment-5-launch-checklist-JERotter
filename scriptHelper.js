@@ -37,6 +37,24 @@ function formSubmission(event, document, list, pilot, copilot, fuelLevel, cargoL
     let copilotNameVer = (validateInput(copilot));
     let fuelVer = (validateInput(fuelLevel));
     let cargoVer = (validateInput(cargoLevel));
+
+    if (pilot.value.length > 1 && copilot.value.length > 1 && fuelLevel.value > 10000 && cargoLevel.value < 10000 && cargoVer !== "Empty") { 
+       
+        list.style.visibility = "visible";
+        statVar1 = document.getElementById("launchStatus");
+        cpVar = document.getElementById('copilotStatus'); 
+        cVar = document.getElementById('cargoStatus');
+        fVar = document.getElementById('fuelStatus');
+        pVar = document.getElementById('pilotStatus');
+        pVar.innerText = `Pilot ${pilot.value} is ready for launch.`
+        cpVar.innerText = `Copilot ${copilot.value} is ready for launch.`
+        fVar.innerText = `There is enough fuel for the journey.`
+        cVar.innerText = `Cargo mass low enough for launch.`
+        statVar1.style.color = "green";
+        statVar1.innerText = "Shuttle ready for launch"; 
+        event.preventDefault();
+    }
+
     
     if (pilotNameVer === "Is a number") {
         alert("Make sure to enter valid information for each field!");
@@ -65,7 +83,7 @@ function formSubmission(event, document, list, pilot, copilot, fuelLevel, cargoL
         event.preventDefault();
     } else if (cargoLevel.value > 10000) {
         cVar = document.getElementById('cargoStatus');
-        cVar.innerText = `there is too much mass for the shuttle to take off.`
+        cVar.innerText = `There is too much mass for the shuttle to take off.`
         list.style.visibility = "visible"; 
         hVar1 = document.getElementById("launchStatus");
         hVar1.style.color = "red";
@@ -77,29 +95,24 @@ function formSubmission(event, document, list, pilot, copilot, fuelLevel, cargoL
         alert("Make sure to enter valid information for each field!");
         console.log(typeof fuelVer.value);
         event.preventDefault();
-    } else if (fuelLevel.value < 10000) {
+    } else if (fuelLevel.value > 0 && fuelLevel.value < 10000) {
         fVar = document.getElementById('fuelStatus');
-        fVar.innerText = `there is not enough fuel for the journey.`
+        fVar.innerText = `There is not enough fuel for the journey.`
         list.style.visibility = "visible";
-        hVar1 = document.getElementById("launchStatus");
-        hVar1.style.color = "red";
-        hVar1.innerText = "Shuttle not ready for launch"; 
+        hVar2 = document.getElementById("launchStatus");
+        hVar2.style.color = "red";
+        hVar2.innerText = "Shuttle not ready for launch"; 
         event.preventDefault();
     }//fuel
 
 
     if(pilotNameVer === "Empty" || copilotNameVer === "Empty" || fuelVer === "Empty" || cargoVer === "Empty") {
+        list.style.visibility = "invisible";
         alert("All fields are required!");
         event.preventDefault();
     }
 
-
-    if (pilot.value.length > 1 && copilot.value.length > 1 && fuelLevel.value > 10000 && cargoLevel.value < 10000) { 
-       
-        hVar1 = document.getElementById("launchStatus");
-        hVar1.style.color = "green";
-        hVar1.innerText = "Shuttle ready for launch"; 
-    }
+    // setTimeout(document.querySelector("form").submit(), 10000);
 }
 
 async function myFetch() {
